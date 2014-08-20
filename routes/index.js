@@ -5,7 +5,7 @@ var Post = require('../models/post');
 /* GET home page. */
 router.get('/', function(req, res) {
   var posts = [];
-  Post.find({}, function(err, docs){
+  Post.find({}).sort({_id:-1}).exec(function(err, docs){
     if(err){
       posts = [];
     }
