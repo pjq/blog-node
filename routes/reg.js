@@ -28,16 +28,33 @@ router.post('/', function(req, res) {
     email:email
   });
 
-  newUser.save(function(err, user){
+  User.find({name:name}, function(err, docs){
     if(err){
       req.flash('error', err);
       return res.redirect('/reg');
     }
 
-    req.session.user = user;
-    req.flash('success', 'register success');
-    res.redirect('/');
+    console.log('find the exist users:\n' + docs);
+    if('' != docs){
+      console.log(name + ' already exist');
+      req.flash('error', name + ' user already exist');
+      return res.redirect('/reg');
+    }else{
+      newUser.save(function(err, user){
+        if(err){
+          req.flash('error', err);
+          return res.redirect('/reg');
+        }
+
+        req.session.user = user;
+        req.flash('success', 'register success');
+        res.redirect('/');
+      });
+    }
+
+
   });
+
 });
 
 module.exports = router;

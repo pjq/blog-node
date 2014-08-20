@@ -6,16 +6,12 @@ router.get('/', function(req, res) {
   res.render('index', { title: 'Express' });
 });
 
-router.get('/login', function(req, res) {
-  res.render('login', { title: 'Login' });
-});
-
-router.get('/post', function(req, res) {
-  res.send('Post');
-});
-
-router.get('/logout', function(req, res) {
-  res.send('logout');
-});
+//router.get('/post', function(req, res) {
+//  res.send('Post');
+//});
+//
+//router.get('/logout', function(req, res) {
+//  res.send('logout');
+//});
 
 module.exports = router;
