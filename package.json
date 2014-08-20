@@ -13,8 +13,9 @@
     "body-parser": "~1.0.0",
     "debug": "~0.7.4",
     "mongodb": "*",
-    "connect-mongo": "*",
+    "mongoose": "*",
     "express-session": "*",
+    "connect-flash": "*",
     "ejs": "~0.8.5"
   }
 }
