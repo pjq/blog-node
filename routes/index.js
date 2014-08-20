@@ -1,17 +1,30 @@
 var express = require('express');
 var router = express.Router();
+var Post = require('../models/post');
 
 /* GET home page. */
 router.get('/', function(req, res) {
-  res.render('index', { title: 'Express' });
-});
+  var posts = [];
+  Post.find({}, function(err, docs){
+    if(err){
+      posts = [];
+    }
 
-//router.get('/post', function(req, res) {
-//  res.send('Post');
-//});
-//
-//router.get('/logout', function(req, res) {
-//  res.send('logout');
-//});
+    if('' != docs){
+      posts = docs;
+    }else{
+    }
+
+    res.render('index', { 
+      title: 'Jianqing\'s Blog' ,
+      posts:posts,
+      info:'This is Jianqing\s new Blog, built by Jianqing Peng, base on nodejs + express + mongodb.',
+      user: req.session.user,
+      success: req.flash('success').toString(),
+      error: req.flash('error').toString()
+    });
+  });
+
+});
 
 module.exports = router;

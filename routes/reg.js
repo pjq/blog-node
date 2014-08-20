@@ -2,10 +2,18 @@ var express = require('express');
 var router = express.Router();
 var crypto = require('crypto');
 var User = require('../models/user.js');
+var Lib = require('./common');
 
-router.get('/', function(req, res) {
-  console.log('register page!!!');
-  res.render('reg', { title: 'Register' });
+
+router.get('/', function(req, res, next) {
+  //Lib.checkNotLogin();
+
+  res.render('reg', { 
+    title: 'Register' ,
+    user: req.session.user,
+    success: req.flash('success').toString(),
+    error: req.flash('error').toString()
+  });
 });
 
 router.post('/', function(req, res) {

@@ -4,7 +4,12 @@ var crypto = require('crypto');
 var User = require('../models/user.js');
 
 router.get('/', function(req, res) {
-  res.render('login', { title: 'Login' });
+  res.render('login', { 
+    title: 'Login' ,
+    user: req.session.user,
+    success: req.flash('success').toString(),
+    error: req.flash('error').toString()
+  });
 });
 
 router.post('/', function(req, res) {
@@ -23,6 +28,8 @@ router.post('/', function(req, res) {
     console.log('find the exist users:\n' + docs);
     if('' != docs){
       console.log(name + ' login success');
+      var user = new User({name:name, password:password});
+      req.session.user = user;
       req.flash('success', name + ' login success');
       return res.redirect('/');
     }else{
