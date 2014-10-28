@@ -34,6 +34,8 @@ function render_result(req, res, result){
 
 router.get('/deploy', function(req, res) {
   //result = exec('sh `pwd`/tools/deploy.sh', output);
+  console.log('Get deploy request ' + new Date());
+  res.write('Get deploy request ' + new Date() + '\n');
 
   var result = spawn('sh', ['tools/deploy.sh']);
   var resultString = "";
