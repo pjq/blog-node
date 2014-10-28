@@ -33,18 +33,20 @@ function render_result(req, res, result){
 }
 
 router.get('/deploy', function(req, res) {
-  //console.log(result);
   //result = exec('sh `pwd`/tools/deploy.sh', output);
 
   var result = spawn('sh', ['tools/deploy.sh']);
+  var resultString = "";
 
   result.stdout.on('data', function (data) {    // register one or more handlers
     console.log('stdout: ' + data);
     res.write(data);
-    //render_result(req, res, data);
+    resultString += data;
+    // render_result(req, res, data);
   });
 
  result.stderr.on('data', function (data) {
+    resultString += data;
    console.log('stderr: ' + data);
     //render_result(req, res, data);
     res.write(data);
@@ -52,7 +54,9 @@ router.get('/deploy', function(req, res) {
 
   result.on('exit', function (code) {
     console.log('child process exited with code ' + code);
-    //render_result(req, res, 'child process exited with code ' + code);
+    resultString += 'child process exited with code ' + code;
+    // render_result(req, res,resultString);
+    // res.write(resultString);
     res.end();
   });
 });
