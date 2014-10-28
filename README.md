@@ -24,3 +24,21 @@ mongo
 use blog
 db.users.find()
 ```
+
+Auto deploy API
+========
+Call this API to get the latest code, actually it will run
+```
+git pull origin master
+```
+So you had better use supervisor to run the app
+```
+screen -S node
+npm install -g supervisor
+supervisor bin/www
+```
+
+Then you can call this API to deploy the latest code
+```
+http://host:port/admin/deploy
+```
