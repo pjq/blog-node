@@ -23,6 +23,10 @@ Start the app, you can use forever or supervisor or just call node
 ```
 node www/bin
 ```
+Then you already get you baby site
+```
+http://127.0.0.1:3000/
+```
 
 Use supervisor to autoreload the app
 ========
